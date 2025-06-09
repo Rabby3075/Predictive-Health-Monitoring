@@ -8,7 +8,7 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:8000/models")
+    fetch("https://predictive-health-monitoring.onrender.com/models")
       .then((res) => res.json())
       .then((data) => {
         setModels(data.models);
