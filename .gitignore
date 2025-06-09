@@ -61,8 +61,11 @@ coverage.xml
 # Data and models
 Dataset/
 models/
-report/eda_images/
-report/eval_plots/
+# Allow only .png images in EDA and eval plots
+report/eda_images/*
+!report/eda_images/*.png
+report/eval_plots/*
+!report/eval_plots/*.png
 *.joblib
 *.pkl
 *.h5
