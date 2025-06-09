@@ -65,6 +65,8 @@ const ONE_HOT_MAP = {
   primary_diagnosis: DIAG_OPTIONS,
 };
 
+const API_URL = "https://predictive-health-monitoring.onrender.com";
+
 function getPrimaryDiagnosis(diag1, diag2, diag3) {
   const counts = {};
   [diag1, diag2, diag3].forEach(d => {
@@ -150,7 +152,7 @@ function ModelForm({ features }) {
     setLoading(true);
     try {
       const processed = preprocessInput(input);
-      const response = await fetch("https://predictive-health-monitoring.onrender.com/predict", {
+      const response = await fetch(`${API_URL}/predict`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -178,7 +180,7 @@ function ModelForm({ features }) {
     const fetchModels = async () => {
       setLoadingModels(true);
       try {
-        const res = await fetch("https://predictive-health-monitoring.onrender.com/models");
+        const res = await fetch(`${API_URL}/models`);
         const data = await res.json();
         setModels(data.models);
       } catch (err) {
