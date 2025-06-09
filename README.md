@@ -125,3 +125,23 @@ Visit [http://localhost:3000](http://localhost:3000)
 
 ## Credits
 Developed by Rashedul Haque.
+
+## Model Training (from Scratch)
+
+If you want to train the models yourself (instead of using the provided .joblib files):
+
+1. **Preprocess the data:**
+   - Run your preprocessing script (e.g., `python Data\pipeline\preprocess.py`) to generate processed data.
+
+2. **Train models:**
+   - Run the training script:
+     ```sh
+     python models/train_models.py
+     ```
+   - This will train all models (Logistic Regression, Random Forest, XGBoost, MLP) and save them as `.joblib` files in the `models/` directory.
+
+3. **Outputs:**
+   - Trained model files: `models/*.joblib`
+   - Evaluation results and plots: `report/eval_plots/`
+
+**Note:** You may need to adjust paths in the scripts depending on your setup.
