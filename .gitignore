@@ -74,7 +74,6 @@ report/eval_plots/*
 *.xls
 *.sav
 improvement/tuned_models/
-Deployment/backend/models/
 
 # Node modules
 node_modules/
