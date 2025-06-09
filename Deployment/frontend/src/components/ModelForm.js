@@ -16,7 +16,7 @@ import {
   TextField,
   Typography
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // Unique values for dropdowns (from your screenshots)
 const AGE_OPTIONS = ["[60-70)", "[70-80)", "[80-90)", "[90-100)"];
@@ -74,8 +74,9 @@ function getPrimaryDiagnosis(diag1, diag2, diag3) {
   return Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];
 }
 
-function ModelForm({ models, features }) {
-  const [selectedModel, setSelectedModel] = useState(models[0] || "");
+function ModelForm({ features }) {
+  const [models, setModels] = useState([]);
+  const [selectedModel, setSelectedModel] = useState("");
   const [input, setInput] = useState({
     age: AGE_OPTIONS[0],
     time_in_hospital: "",
@@ -98,6 +99,7 @@ function ModelForm({ models, features }) {
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loadingModels, setLoadingModels] = useState(false);
 
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -148,7 +150,7 @@ function ModelForm({ models, features }) {
     setLoading(true);
     try {
       const processed = preprocessInput(input);
-      const response = await fetch("http://localhost:8000/predict", {
+      const response = await fetch("https://predictive-health-monitoring.onrender.com/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -171,6 +173,21 @@ function ModelForm({ models, features }) {
   };
 
   const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    const fetchModels = async () => {
+      setLoadingModels(true);
+      try {
+        const res = await fetch("https://predictive-health-monitoring.onrender.com/models");
+        const data = await res.json();
+        setModels(data.models);
+      } catch (err) {
+        setError("Failed to load models");
+      }
+      setLoadingModels(false);
+    };
+    fetchModels();
+  }, []);
 
   return (
     <Paper elevation={3} sx={{ p: 4, mt: 4, borderRadius: 3 }}>

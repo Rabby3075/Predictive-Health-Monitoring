@@ -59,8 +59,8 @@ coverage.xml
 .vscode/
 
 # Data and models
-Dataset/*
-!Dataset/*.py
+# Dataset/*
+# !Dataset/*.py
 models/*
 !models/*.py
 # Allow only .png images in EDA and eval plots

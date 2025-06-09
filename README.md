@@ -10,7 +10,7 @@ A full-stack machine learning project to predict hospital readmission risk for a
 
 ---
 
-## Project Structure
+## 1. Project Structure
 
 ```
 .
@@ -26,7 +26,23 @@ A full-stack machine learning project to predict hospital readmission risk for a
 
 ---
 
-## 1. Data Preprocessing & EDA
+## 2. Requirements
+- Python 3.8+
+- Node.js 16+
+- See `Deployment/backend/requirements.txt` and `Deployment/frontend/package.json`
+
+---
+
+## 3. Features
+- Select from multiple ML models
+- User-friendly form for patient data
+- Real-time prediction with probability visualization
+- All preprocessing handled in the frontend to match model pipeline
+- Clear, color-coded results (red for "Readmitted", green for "Not Readmitted")
+
+---
+
+## 4. Data Preprocessing & EDA
 - Filtered for aged care (60+)
 - Mapped age ranges to midpoints
 - Handled missing values, outliers, and categorical variables
@@ -49,11 +65,25 @@ A full-stack machine learning project to predict hospital readmission risk for a
 
 ---
 
-## 2. Model Training & Evaluation
-- Trained Logistic Regression, Random Forest, XGBoost, and MLP
-- Saved best models to `models/`
-- Evaluation metrics and plots saved in `report/`
-- XGBoost performed best after feature engineering and tuning
+## 5. Model Training (from Scratch)
+
+If you want to train the models yourself (instead of using the provided .joblib files):
+
+1. **Preprocess the data:**
+   - Run your preprocessing script (e.g., `python Data\pipeline\preprocess.py`) to generate processed data.
+
+2. **Train models:**
+   - Run the training script:
+     ```sh
+     python models/train_models.py
+     ```
+   - This will train all models (Logistic Regression, Random Forest, XGBoost, MLP) and save them as `.joblib` files in the `models/` directory.
+
+3. **Outputs:**
+   - Trained model files: `models/*.joblib`
+   - Evaluation results and plots: `report/eval_plots/`
+
+**Note:** You may need to adjust paths in the scripts depending on your setup.
 
 ### Example Model Evaluation Plots
 
@@ -74,7 +104,7 @@ A full-stack machine learning project to predict hospital readmission risk for a
 
 ---
 
-## 3. Deployment
+## 6. Deployment
 ### Backend (FastAPI)
 - Serves `/models` (list available models) and `/predict` (make prediction) endpoints
 - Loads all trained models at startup
@@ -88,16 +118,16 @@ A full-stack machine learning project to predict hospital readmission risk for a
 
 ---
 
-## How to Run
+## 7. How to Run
 
-### 1. Backend (FastAPI)
+### Backend (FastAPI)
 ```bash
 cd Deployment/backend
 pip install -r requirements.txt
 uvicorn app:app --reload --host 0.0.0.0 --port 8000
 ```
 
-### 2. Frontend (React)
+### Frontend (React)
 ```bash
 cd Deployment/frontend
 npm install
@@ -107,41 +137,5 @@ Visit [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## Features
-- Select from multiple ML models
-- User-friendly form for patient data
-- Real-time prediction with probability visualization
-- All preprocessing handled in the frontend to match model pipeline
-- Clear, color-coded results (red for "Readmitted", green for "Not Readmitted")
-
----
-
-## Requirements
-- Python 3.8+
-- Node.js 16+
-- See `Deployment/backend/requirements.txt` and `Deployment/frontend/package.json`
-
----
-
-## Credits
+## 8. Credits
 Developed by Rashedul Haque.
-
-## Model Training (from Scratch)
-
-If you want to train the models yourself (instead of using the provided .joblib files):
-
-1. **Preprocess the data:**
-   - Run your preprocessing script (e.g., `python Data\pipeline\preprocess.py`) to generate processed data.
-
-2. **Train models:**
-   - Run the training script:
-     ```sh
-     python models/train_models.py
-     ```
-   - This will train all models (Logistic Regression, Random Forest, XGBoost, MLP) and save them as `.joblib` files in the `models/` directory.
-
-3. **Outputs:**
-   - Trained model files: `models/*.joblib`
-   - Evaluation results and plots: `report/eval_plots/`
-
-**Note:** You may need to adjust paths in the scripts depending on your setup.
