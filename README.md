@@ -124,4 +124,4 @@ Visit [http://localhost:3000](http://localhost:3000)
 ---
 
 ## Credits
-Developed by Rashed and AI assistant. For academic and demonstration purposes. 
+Developed by Rashedul Haque.
